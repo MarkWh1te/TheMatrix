@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>The Matrix</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: black;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas-id"></canvas>
+    <script>
+        const all_string = () => {
+            let all = ""
+            for (let i = 33; i < 127; i++) {
+                let char = String.fromCharCode(i)
+                all += char
+            }
+            return all
+        }
+        const draw = (ctx, canvas, drops, speeds, FONT_SIZE, CHARACTERS) => {
+
+            // use tranparnt to show trail
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "#0F0"
+            ctx.font = FONT_SIZE + "px arial";
+
+            for (var i = 0; i < drops.length; i++) {
+
+                let text = CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)]
+
+                ctx.fillText(text, i * FONT_SIZE, drops[i] * FONT_SIZE)
+
+                // use biggest prime number in 100 as trashhold
+                if (drops[i] * FONT_SIZE > canvas.height && Math.random() > 0.887)
+                    drops[i] = 0
+
+                //incrementing Y coordinate
+                drops[i] += speeds[i]
+            }
+        }
+        const columns2drops = (columns) => {
+            let drops = []
+            for (var x = 0; x < columns; x++) {
+                drops[x] = 1
+            }
+            return drops
+        }
+        const columns2speeds = (columns) => {
+            let speeds = []
+            for (var x = 0; x < columns; x++) {
+                speeds[x] = Math.random() * 0.5 + 0.6
+            }
+            return speeds
+        }
+
+        function launchFullscreen(element) {
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+            } else if (element.msRequestFullscreen) {
+                element.msRequestFullscreen();
+            } else if (element.webkitRequestFullscreen) {
+                element.webkitRequestFullScreen();
+            }
+        }
+
+        const __main = () => {
+            let canvas = document.getElementById("canvas-id")
+            let ctx = canvas.getContext("2d")
+            //set canvas full window
+            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth;
+            console.log('f')
+
+
+            //init basic parameter
+            const FONT_SIZE = 12
+            const COLUMNS = canvas.width / FONT_SIZE
+            const CHARACTERS = all_string().split("")
+            let drops = columns2drops(COLUMNS)
+            let speeds = columns2speeds(COLUMNS)
+
+            canvas.onclick = () => {
+                launchFullscreen(canvas)
+            }
+            setInterval(
+                () => {
+                    draw(ctx, canvas, drops, speeds, FONT_SIZE, CHARACTERS)
+                }, 33)
+        }
+        __main()
+    </script>
+</body>
+
+</html>
