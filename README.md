@@ -21,4 +21,5 @@ open index.html
 now open your browers and click the green letters to start fullpage mode
 
 | **`LICENSE`** |
+
 [GPLv3](LICENSE)
