@@ -8,9 +8,11 @@ Browers based "The Matrix" like implementation
 | **`Usage`** |
 
 1. Online Version
+
 open [online demo](https://markwh1te.com/matrix.html) in your browers and click the green letters to start fullpage mode
 
 2. Local Version
+
 ```bash
 git clone git@github.com:MarkWh1te/TheMatrix.git
 cd TheMatrix
