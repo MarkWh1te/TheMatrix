@@ -9,7 +9,7 @@ Browers based "The Matrix" like implementation
 
 1. Online Version
 
-open [online demo](https://markwh1te.com/matrix.html) in your browers and click the green letters to start fullpage mode
+open [online demo](https://markwh1te.com/thematrix.html) in your browers and click the green letters to start fullpage mode
 
 2. Local Version
 
